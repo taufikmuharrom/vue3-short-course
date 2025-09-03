@@ -12,6 +12,7 @@ Vue.js adalah progressive framework JavaScript untuk membangun user interface. V
 - **Tree Shaking**: Bundle size yang lebih kecil
 
 **Ekosistem Vue 3:**
+
 - **Vite**: Build tool yang sangat cepat
 - **Vue Router**: Routing untuk SPA
 - **Pinia**: State management (pengganti Vuex)
@@ -27,7 +28,7 @@ npm create vue@latest my-vue-app
 
 # 2. Pilih konfigurasi:
 # ✅ Add TypeScript? → No
-# ✅ Add JSX Support? → No  
+# ✅ Add JSX Support? → No
 # ✅ Add Vue Router? → No
 # ✅ Add Pinia? → No
 # ✅ Add Vitest? → No
@@ -62,6 +63,7 @@ my-vue-app/
 ### 4. Template Syntax
 
 #### A. Interpolasi (Text Interpolation)
+
 ```vue
 <template>
   <div>
@@ -76,17 +78,18 @@ my-vue-app/
 #### B. Directives
 
 ##### v-bind (Attribute Binding)
+
 ```vue
 <template>
   <div>
     <!-- Binding attribute -->
-    <img v-bind:src="imageUrl" v-bind:alt="imageAlt">
+    <img v-bind:src="imageUrl" v-bind:alt="imageAlt" />
     <!-- Shorthand -->
-    <img :src="imageUrl" :alt="imageAlt">
-    
+    <img :src="imageUrl" :alt="imageAlt" />
+
     <!-- Class binding -->
     <div :class="{ active: isActive, error: hasError }"></div>
-    
+
     <!-- Style binding -->
     <div :style="{ color: textColor, fontSize: fontSize + 'px' }"></div>
   </div>
@@ -94,6 +97,7 @@ my-vue-app/
 ```
 
 ##### v-if, v-else-if, v-else (Conditional Rendering)
+
 ```vue
 <template>
   <div>
@@ -101,7 +105,7 @@ my-vue-app/
     <h1 v-else-if="score >= 70">Good!</h1>
     <h1 v-else-if="score >= 50">Fair</h1>
     <h1 v-else>Need Improvement</h1>
-    
+
     <!-- v-show vs v-if -->
     <p v-show="isVisible">Ini menggunakan v-show (display: none)</p>
     <p v-if="isVisible">Ini menggunakan v-if (DOM element)</p>
@@ -110,6 +114,7 @@ my-vue-app/
 ```
 
 ##### v-for (List Rendering)
+
 ```vue
 <template>
   <div>
@@ -119,52 +124,51 @@ my-vue-app/
         {{ hobby }}
       </li>
     </ul>
-    
+
     <!-- Array of objects -->
     <ul>
       <li v-for="user in users" :key="user.id">
         {{ user.name }} - {{ user.email }}
       </li>
     </ul>
-    
+
     <!-- With index -->
     <ul>
       <li v-for="(item, index) in items" :key="index">
         {{ index }} - {{ item }}
       </li>
     </ul>
-    
+
     <!-- Object properties -->
     <ul>
-      <li v-for="(value, key) in object" :key="key">
-        {{ key }}: {{ value }}
-      </li>
+      <li v-for="(value, key) in object" :key="key">{{ key }}: {{ value }}</li>
     </ul>
   </div>
 </template>
 ```
 
 ##### v-model (Two-way Binding)
+
 ```vue
 <template>
   <div>
     <!-- Input text -->
-    <input v-model="message" placeholder="Ketik sesuatu...">
+    <input v-model="message" placeholder="Ketik sesuatu..." />
     <p>Pesan: {{ message }}</p>
-    
+
     <!-- Textarea -->
     <textarea v-model="description"></textarea>
-    
+
     <!-- Checkbox -->
-    <input type="checkbox" v-model="isChecked">
+    <input type="checkbox" v-model="isChecked" />
     <label>Setuju dengan syarat dan ketentuan</label>
-    
+
     <!-- Radio buttons -->
-    <input type="radio" value="A" v-model="selectedOption">
+    <input type="radio" value="A" v-model="selectedOption" />
     <label>Option A</label>
-    <input type="radio" value="B" v-model="selectedOption">
+    <input type="radio" value="B" v-model="selectedOption" />
     <label>Option B</label>
-    
+
     <!-- Select -->
     <select v-model="selectedCity">
       <option disabled value="">Pilih kota</option>
@@ -179,56 +183,59 @@ my-vue-app/
 ### 5. Reactive Data dengan ref & reactive
 
 #### A. ref() - Untuk primitive values
+
 ```vue
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 // Reactive primitive values
-const count = ref(0)
-const message = ref('Hello Vue!')
-const isVisible = ref(true)
+const count = ref(0);
+const message = ref("Hello Vue!");
+const isVisible = ref(true);
 
 // Mengakses value dengan .value di script
-console.log(count.value) // 0
-count.value++ // increment
+console.log(count.value); // 0
+count.value++; // increment
 
 // Di template tidak perlu .value - otomatis unwrapped
 </script>
 ```
 
 #### B. reactive() - Untuk objects dan arrays
+
 ```vue
 <script setup>
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
 // Reactive object
 const user = reactive({
-  name: 'John Doe',
+  name: "John Doe",
   age: 25,
-  email: 'john@example.com'
-})
+  email: "john@example.com",
+});
 
 // Reactive array
-const hobbies = reactive(['Reading', 'Swimming', 'Coding'])
+const hobbies = reactive(["Reading", "Swimming", "Coding"]);
 
 // Nested reactive object
 const state = reactive({
   user: {
     profile: {
-      name: 'Jane',
+      name: "Jane",
       settings: {
-        theme: 'dark'
-      }
-    }
+        theme: "dark",
+      },
+    },
   },
-  items: [1, 2, 3]
-})
+  items: [1, 2, 3],
+});
 </script>
 ```
 
 #### C. Syntax `<script setup>` vs `setup()`
 
 **Keuntungan `<script setup>`:**
+
 - Lebih ringkas, tidak perlu return statement
 - Auto-import components
 - Better TypeScript inference
@@ -237,43 +244,45 @@ const state = reactive({
 **Perbandingan:**
 
 **Traditional setup():**
+
 ```vue
 <script>
-import { ref } from 'vue'
-import MyComponent from './MyComponent.vue'
+import { ref } from "vue";
+import MyComponent from "./MyComponent.vue";
 
 export default {
   components: {
-    MyComponent
+    MyComponent,
   },
   setup() {
-    const count = ref(0)
-    
+    const count = ref(0);
+
     const increment = () => {
-      count.value++
-    }
-    
+      count.value++;
+    };
+
     return {
       count,
-      increment
-    }
-  }
-}
+      increment,
+    };
+  },
+};
 </script>
 ```
 
 **Script Setup (Recommended):**
+
 ```vue
 <script setup>
-import { ref } from 'vue'
-import MyComponent from './MyComponent.vue'
+import { ref } from "vue";
+import MyComponent from "./MyComponent.vue";
 
 // Langsung bisa digunakan - no return needed
-const count = ref(0)
+const count = ref(0);
 
 const increment = () => {
-  count.value++
-}
+  count.value++;
+};
 </script>
 ```
 
@@ -287,12 +296,14 @@ const increment = () => {
 ### Latihan 1: Setup Project Vue dengan Vite
 
 **Tugas:**
+
 1. Buat project Vue baru dengan nama `biodata-app`
 2. Setup dengan konfigurasi minimal (tanpa TypeScript, Router, dll)
 3. Jalankan development server
 4. Buka di browser dan pastikan "Hello Vue!" muncul
 
 **Langkah-langkah:**
+
 ```bash
 npm create vue@latest biodata-app
 cd biodata-app
@@ -305,18 +316,19 @@ npm run dev
 **Tugas:** Buat komponen untuk menampilkan biodata dengan data binding
 
 **File: `src/App.vue`**
+
 ```vue
 <template>
   <div class="container">
     <h1>Biodata Saya</h1>
-    
+
     <!-- Tampilkan biodata -->
     <div class="biodata">
       <h2>{{ nama }}</h2>
       <p><strong>Umur:</strong> {{ umur }} tahun</p>
       <p><strong>Email:</strong> {{ email }}</p>
       <p><strong>Kota:</strong> {{ kota }}</p>
-      
+
       <!-- Tampilkan daftar hobi -->
       <div class="hobi-section">
         <h3>Hobi Saya:</h3>
@@ -331,22 +343,16 @@ npm run dev
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue";
 
 // Menggunakan ref untuk primitive values
-const nama = ref('John Doe')
-const umur = ref(25)
-const email = ref('john.doe@email.com')
-const kota = ref('Jakarta')
+const nama = ref("John Doe");
+const umur = ref(25);
+const email = ref("john.doe@email.com");
+const kota = ref("Jakarta");
 
 // Menggunakan reactive untuk array
-const hobi = reactive([
-  'Membaca',
-  'Berenang', 
-  'Coding',
-  'Gaming',
-  'Traveling'
-])
+const hobi = reactive(["Membaca", "Berenang", "Coding", "Gaming", "Traveling"]);
 </script>
 
 <style>
@@ -400,28 +406,27 @@ h2 {
 **Tugas:** Tambahkan kondisi untuk menampilkan status dewasa/remaja berdasarkan umur
 
 **Update `src/App.vue`:**
+
 ```vue
 <template>
   <div class="container">
     <h1>Biodata Saya</h1>
-    
+
     <div class="biodata">
       <h2>{{ nama }}</h2>
       <p><strong>Umur:</strong> {{ umur }} tahun</p>
-      
+
       <!-- Conditional rendering berdasarkan umur -->
       <div class="status">
         <p v-if="umur >= 18" class="dewasa">
           🎉 Status: <strong>Dewasa</strong>
         </p>
-        <p v-else class="remaja">
-          👶 Status: <strong>Remaja</strong>
-        </p>
+        <p v-else class="remaja">👶 Status: <strong>Remaja</strong></p>
       </div>
-      
+
       <p><strong>Email:</strong> {{ email }}</p>
       <p><strong>Kota:</strong> {{ kota }}</p>
-      
+
       <!-- Kondisi untuk menampilkan hobi -->
       <div class="hobi-section">
         <h3>Hobi Saya:</h3>
@@ -435,11 +440,9 @@ h2 {
             <strong>Total Hobi: {{ hobi.length }}</strong>
           </p>
         </div>
-        <p v-else class="no-hobi">
-          Belum ada hobi yang terdaftar.
-        </p>
+        <p v-else class="no-hobi">Belum ada hobi yang terdaftar.</p>
       </div>
-      
+
       <!-- Tombol untuk mengubah umur -->
       <div class="controls">
         <button @click="tambahUmur">Tambah Umur</button>
@@ -450,31 +453,25 @@ h2 {
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue";
 
-const nama = ref('John Doe')
-const umur = ref(17) // Mulai dengan 17 untuk testing
-const email = ref('john.doe@email.com')
-const kota = ref('Jakarta')
+const nama = ref("John Doe");
+const umur = ref(17); // Mulai dengan 17 untuk testing
+const email = ref("john.doe@email.com");
+const kota = ref("Jakarta");
 
-const hobi = reactive([
-  'Membaca',
-  'Berenang', 
-  'Coding',
-  'Gaming',
-  'Traveling'
-])
+const hobi = reactive(["Membaca", "Berenang", "Coding", "Gaming", "Traveling"]);
 
 // Methods untuk mengubah umur
 const tambahUmur = () => {
-  umur.value++
-}
+  umur.value++;
+};
 
 const kurangiUmur = () => {
   if (umur.value > 0) {
-    umur.value--
+    umur.value--;
   }
-}
+};
 </script>
 
 <style>
@@ -579,6 +576,7 @@ h2 {
 **Tugas:** Buat form untuk mengubah data biodata secara interaktif
 
 **File: `src/components/BiodataForm.vue`**
+
 ```vue
 <template>
   <div class="form-container">
@@ -586,36 +584,26 @@ h2 {
     <form @submit.prevent="updateBiodata">
       <div class="form-group">
         <label for="nama">Nama:</label>
-        <input 
-          type="text" 
-          id="nama" 
-          v-model="formData.nama"
-          required
-        >
+        <input type="text" id="nama" v-model="formData.nama" required />
       </div>
-      
+
       <div class="form-group">
         <label for="umur">Umur:</label>
-        <input 
-          type="number" 
-          id="umur" 
+        <input
+          type="number"
+          id="umur"
           v-model.number="formData.umur"
           min="1"
           max="100"
           required
-        >
+        />
       </div>
-      
+
       <div class="form-group">
         <label for="email">Email:</label>
-        <input 
-          type="email" 
-          id="email" 
-          v-model="formData.email"
-          required
-        >
+        <input type="email" id="email" v-model="formData.email" required />
       </div>
-      
+
       <div class="form-group">
         <label for="kota">Kota:</label>
         <select v-model="formData.kota" required>
@@ -627,60 +615,58 @@ h2 {
           <option value="Semarang">Semarang</option>
         </select>
       </div>
-      
+
       <div class="form-group">
         <label>Hobi (centang yang sesuai):</label>
         <div class="checkbox-group">
           <label v-for="hobby in availableHobbies" :key="hobby">
-            <input 
-              type="checkbox" 
-              :value="hobby"
-              v-model="selectedHobbies"
-            >
+            <input type="checkbox" :value="hobby" v-model="selectedHobbies" />
             {{ hobby }}
           </label>
         </div>
       </div>
-      
-      <button type="submit" class="submit-btn">
-        Update Biodata
-      </button>
+
+      <button type="submit" class="submit-btn">Update Biodata</button>
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue";
 
 // Define emits
-const emit = defineEmits(['update-biodata'])
+const emit = defineEmits(["update-biodata"]);
 
 const formData = reactive({
-  nama: 'John Doe',
+  nama: "John Doe",
   umur: 25,
-  email: 'john.doe@email.com',
-  kota: 'Jakarta'
-})
+  email: "john.doe@email.com",
+  kota: "Jakarta",
+});
 
 const availableHobbies = ref([
-  'Membaca', 'Berenang', 'Coding', 'Gaming', 
-  'Traveling', 'Fotografi', 'Memasak', 'Olahraga'
-])
+  "Membaca",
+  "Berenang",
+  "Coding",
+  "Gaming",
+  "Traveling",
+  "Fotografi",
+  "Memasak",
+  "Olahraga",
+]);
 
-const selectedHobbies = ref([
-  'Membaca', 'Berenang', 'Coding'
-])
+const selectedHobbies = ref(["Membaca", "Berenang", "Coding"]);
 
 const updateBiodata = () => {
   const biodataUpdate = {
     ...formData,
-    hobi: [...selectedHobbies.value]
-  }
-  
-  emit('update-biodata', biodataUpdate)
-  
-  alert('Biodata berhasil diupdate!')
-}
+    hobi: [...selectedHobbies.value],
+  };
+
+  emit("update-biodata", biodataUpdate);
+
+  alert("Biodata berhasil diupdate!");
+};
 </script>
 
 <style scoped>
@@ -688,7 +674,7 @@ const updateBiodata = () => {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
 }
 
@@ -750,28 +736,27 @@ select {
 ```
 
 **Update `src/App.vue` untuk menggunakan form:**
+
 ```vue
 <template>
   <div class="container">
     <h1>Biodata Saya</h1>
-    
+
     <!-- Tampilkan biodata -->
     <div class="biodata">
       <h2>{{ nama }}</h2>
       <p><strong>Umur:</strong> {{ umur }} tahun</p>
-      
+
       <div class="status">
         <p v-if="umur >= 18" class="dewasa">
           🎉 Status: <strong>Dewasa</strong>
         </p>
-        <p v-else class="remaja">
-          👶 Status: <strong>Remaja</strong>
-        </p>
+        <p v-else class="remaja">👶 Status: <strong>Remaja</strong></p>
       </div>
-      
+
       <p><strong>Email:</strong> {{ email }}</p>
       <p><strong>Kota:</strong> {{ kota }}</p>
-      
+
       <div class="hobi-section">
         <h3>Hobi Saya:</h3>
         <div v-if="hobi.length > 0">
@@ -784,41 +769,35 @@ select {
             <strong>Total Hobi: {{ hobi.length }}</strong>
           </p>
         </div>
-        <p v-else class="no-hobi">
-          Belum ada hobi yang terdaftar.
-        </p>
+        <p v-else class="no-hobi">Belum ada hobi yang terdaftar.</p>
       </div>
     </div>
-    
+
     <!-- Form untuk edit biodata -->
     <BiodataForm @update-biodata="handleUpdateBiodata" />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import BiodataForm from './components/BiodataForm.vue'
+import { ref, reactive } from "vue";
+import BiodataForm from "./components/BiodataForm.vue";
 
-const nama = ref('John Doe')
-const umur = ref(25)
-const email = ref('john.doe@email.com')
-const kota = ref('Jakarta')
+const nama = ref("John Doe");
+const umur = ref(25);
+const email = ref("john.doe@email.com");
+const kota = ref("Jakarta");
 
-const hobi = reactive([
-  'Membaca',
-  'Berenang', 
-  'Coding'
-])
+const hobi = reactive(["Membaca", "Berenang", "Coding"]);
 
 const handleUpdateBiodata = (newData) => {
-  nama.value = newData.nama
-  umur.value = newData.umur
-  email.value = newData.email
-  kota.value = newData.kota
-  
+  nama.value = newData.nama;
+  umur.value = newData.umur;
+  email.value = newData.email;
+  kota.value = newData.kota;
+
   // Update hobi array
-  hobi.splice(0, hobi.length, ...newData.hobi)
-}
+  hobi.splice(0, hobi.length, ...newData.hobi);
+};
 </script>
 
 <style>
